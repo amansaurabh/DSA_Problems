@@ -7,9 +7,9 @@ class Solution {
     public boolean union(int x, int y, int[] parent){
             int parent_x = find(x, parent);
             int parent_y = find(y, parent);
-            if(parent_x == parent_y) return false;
+            if(parent_x == parent_y) return true;
             parent[parent_x] = parent_y;
-            return true;
+            return false;
         }
     
     public boolean validPath(int n, int[][] edges, int source, int destination) {

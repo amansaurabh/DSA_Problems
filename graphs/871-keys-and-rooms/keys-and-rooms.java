@@ -3,8 +3,8 @@ class Solution {
         int n = rooms.size();
         boolean[] vis = new boolean[n];
         dfs(rooms, 0, vis);
-        for(boolean roomVis : vis){
-             if (!roomVis) {
+        for(int i = 0; i < n; i++){
+             if (!vis[i]) {
                 return false;
             }
         }

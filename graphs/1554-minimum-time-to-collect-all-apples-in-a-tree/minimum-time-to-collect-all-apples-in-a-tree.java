@@ -1,32 +1,28 @@
 class Solution {
 
-   private int dfs(int node, List<List<Integer>> graph, List<Boolean> hasApple, Set<Integer> visited) {
-        visited.add(node);
-        int totalTime = 0;
-
-        for (int neighbor : graph.get(node)) {
-            if (!visited.contains(neighbor)) {
-                int subTreeTime = dfs(neighbor, graph, hasApple, visited);
-                if (subTreeTime > 0 || hasApple.get(neighbor)) {
-                    totalTime += subTreeTime + 2;
-                }
+    private int dfs(List<List<Integer>> adj, int curr, int parent, List<Boolean> hasApple){
+        int time = 0;
+        for(int child : adj.get(curr)){
+            if(child == parent) continue;
+            int timeFromChild = dfs(adj, child, curr, hasApple);
+            if(timeFromChild > 0 || hasApple.get(child) == true){
+                time += timeFromChild + 2;
             }
         }
-
-        return totalTime;
+        return time;
     }
     public int minTime(int n, int[][] edges, List<Boolean> hasApple) {
-        List<List<Integer>> graph = new ArrayList<>();
+        List<List<Integer>> adj = new ArrayList<>();
         for(int i= 0; i < n; i++){
-            graph.add(new ArrayList<>());
+            adj.add(new ArrayList<>());
         }
         for(int[] edge : edges){
             int u = edge[0];
             int v = edge[1];
-            graph.get(u).add(v);
-            graph.get(v).add(u);
+            adj.get(u).add(v);
+            adj.get(v).add(u);
         }
-        Set<Integer> visited = new HashSet<>();
-        return dfs(0, graph, hasApple, visited);
+        int totalTime = dfs(adj, 0, -1, hasApple);
+        return totalTime;
     }
 }

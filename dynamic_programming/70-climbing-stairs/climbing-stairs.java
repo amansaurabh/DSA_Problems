@@ -19,14 +19,22 @@ class Solution {
         // int[] memo = new int[n + 1];
         // Arrays.fill(memo, -1);
         // return climb(n, memo);
-        int[] t = new int[n+1];
-        if(n == 1 || n == 2 || n == 3) return n;
-        t[0] = 0;
-        t[1] = 1;
-        t[2] = 2;
+
+        //Bottom UP
+        // int[] t = new int[n+1];
+        if(n == 1 || n == 2) return n;
+        // t[0] = 0;
+        // t[1] = 1;
+        // t[2] = 2;
+        int a = 1; // i-1
+        int b = 2; // i-2
+        int c = 3; // i-3
         for(int i = 3; i <= n; i++){
-            t[i] = t[i-1] + t[i-2];
+            c = b + a;
+            int temp = b;
+            b = c;
+            a = temp;
         }
-        return t[n];
+        return c;
     }
 }

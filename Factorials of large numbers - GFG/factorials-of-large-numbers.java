@@ -57,10 +57,12 @@ class Solution {
              size = arr.size();
         }
         
-        ArrayList<Integer> ans = new ArrayList<>();
-        for(int i = size - 1; i >= 0; i--){
-            ans.add(arr.get(i));
-        }
-        return ans;
+         Collections.reverse(arr);
+        
+        // ArrayList<Integer> ans = new ArrayList<>();
+        // for(int i = size - 1; i >= 0; i--){
+        //     ans.add(arr.get(i));
+        // }
+        return arr;
     }
 }

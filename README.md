@@ -4,10 +4,10 @@ This repository contains my solutions to various Data Structures and Algorithms 
 
 ## Table of Contents
 
-- [Array](./array)
-- [Graphs](./graphs)
-- [Bit Manipulation](./graphs)
-- [Dynamic Programming](./dynamic_programming)
+- [Array](/array)
+- [Graphs](/graphs)
+- [Bit Manipulation](/graphs)
+- [Dynamic Programming](/dynamic_programming)
 
 ## Getting Started
 

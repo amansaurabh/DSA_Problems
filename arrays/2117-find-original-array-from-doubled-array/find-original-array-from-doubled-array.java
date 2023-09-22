@@ -22,10 +22,7 @@ class Solution {
             if(originalSet.getOrDefault(twice,0) <= 0){
                 return new int[]{};
             }
-                original[index] = num;
-                if(index < n - 1){
-                    index++;
-                }
+                original[index++] = num;
                 originalSet.put(num, originalSet.get(num) - 1);
                 originalSet.put(twice, originalSet.get(twice) - 1);
         }

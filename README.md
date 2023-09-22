@@ -4,9 +4,9 @@ This repository contains my solutions to various Data Structures and Algorithms 
 
 ## Table of Contents
 
-- [Array](/array)
+- [Array](/arrays)
 - [Graphs](/graphs)
-- [Bit Manipulation](/graphs)
+- [Bit Manipulation](/bit-manipulation)
 - [Dynamic Programming](/dynamic_programming)
 
 ## Getting Started
@@ -17,8 +17,8 @@ Feel free to browse through the folders and explore the solutions. You can use t
 
 Each problem folder contains the following files:
 
-- `problem.md`: Contains the problem statement.
-- `solution.java` Contains my solution to the problem.
+- `README.md`: Contains the problem statement.
+- `problem_name.java` Contains my solution to the problem.
 
 ## Contributing
 

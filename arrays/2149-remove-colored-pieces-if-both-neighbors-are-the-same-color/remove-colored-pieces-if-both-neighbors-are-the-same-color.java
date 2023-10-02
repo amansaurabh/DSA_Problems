@@ -3,7 +3,6 @@ class Solution {
         int alice = 0;
         int bob = 0;
         int n = colors.length();
-        if(n <= 2) return false;
         for(int i = 1; i < n - 1; i++){
             if(colors.charAt(i) == colors.charAt(i - 1) && colors.charAt(i) == colors.charAt(i + 1) ){
                 if(colors.charAt(i) == 'A'){

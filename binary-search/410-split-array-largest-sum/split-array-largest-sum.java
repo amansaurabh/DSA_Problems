@@ -22,6 +22,7 @@ class Solution {
         while(low <= high){
             int mid = low + (high - low)/2;
             if(isPossible(nums, mid, k)){
+                
                 low = mid + 1;
                
             }

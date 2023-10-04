@@ -15,6 +15,8 @@ class Solution {
         return split > splits;
     }
     public int splitArray(int[] nums, int k) {
+
+        if(nums.length < k) return -1;
         
         int low = Arrays.stream(nums).max().getAsInt();
         int high = Arrays.stream(nums).sum();
@@ -22,9 +24,7 @@ class Solution {
         while(low <= high){
             int mid = low + (high - low)/2;
             if(isPossible(nums, mid, k)){
-                
                 low = mid + 1;
-               
             }
             else{
                 high = mid - 1; 

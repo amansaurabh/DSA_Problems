@@ -5,6 +5,7 @@ This repository contains my solutions to various Data Structures and Algorithms 
 ## Table of Contents
 
 - [Array](/arrays)
+- [String](/string)
 - [Binary Search](/binary-search)
 - [Graphs](/graphs)
 - [Bit Manipulation](/bit-manipulation)

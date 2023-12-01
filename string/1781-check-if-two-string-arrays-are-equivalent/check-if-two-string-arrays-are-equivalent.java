@@ -13,5 +13,9 @@ class Solution {
 
         if(conWord1.equals(conWord2)) return true;
         else return false;
+
+        //------------Another method-----------------------
+
+        
     }
 }

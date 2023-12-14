@@ -30,8 +30,9 @@ class Solution {
         // if (head == null) return null;
         // head.next = removeNodes(head.next);
         // return head.next != null && head.val < head.next.val ? head.next : head;
+
+        // ------------------------Approach 2: O(n)----------------------
         
-        // ------------------------Approach 2: ----------------------
         ListNode cur = head;
         List<ListNode> list = new ArrayList<>();
         while (cur != null) {

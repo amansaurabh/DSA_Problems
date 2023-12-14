@@ -14,7 +14,7 @@ class Solution {
         // if that word dont want to join then
         int scoreWithoutWord = backtrack(words, lettercount, score, idx + 1);
 
-        int sword = 0;
+        int scoreWord = 0;
         String word = words[idx];
         boolean flag = true;
         for(int i = 0; i < word.length(); i++){
@@ -25,13 +25,13 @@ class Solution {
                 
             }
             lettercount[ch - 'a']--;
-            sword += score[ch - 'a'];
+            scoreWord += score[ch - 'a'];
         }
 
         // Calculate score using the current word if possible
         int scoreWithWord = 0;
         if(flag){
-            scoreWithWord += sword + backtrack(words, lettercount, score, idx + 1);
+            scoreWithWord += scoreWord + backtrack(words, lettercount, score, idx + 1);
         }
 
         for(int i = 0; i < word.length(); i++){

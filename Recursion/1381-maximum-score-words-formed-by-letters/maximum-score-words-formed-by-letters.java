@@ -10,6 +10,8 @@ class Solution {
         if(idx == words.length){
             return 0;
         }
+
+        
         // Every word has two choice : Yes Or No
         // if that word dont want to join then
         int scoreWithoutWord = backtrack(words, lettercount, score, idx + 1);

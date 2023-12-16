@@ -3,7 +3,7 @@ class Solution {
         if(s.length() != t.length()){
             return false;
         }
-        int[] count = new int[26];
+        int[] count = new int[128];
 
         for(char ch : s.toCharArray()){
             count[ch - 'a']++;

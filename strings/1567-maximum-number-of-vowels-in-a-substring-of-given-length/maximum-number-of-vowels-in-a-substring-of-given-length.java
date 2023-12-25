@@ -1,30 +1,40 @@
 class Solution {
     public int maxVowels(String s, int k) {
-        // String vowel = "aeiou";
+        int maxVowelsCount = 0;
+        int currentVowelsCount = 0;
 
-         // Define a set of vowels
+        // Define a set of vowels
         Set<Character> vowels = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
 
-        int totalVowel = 0;
-        
-
-        for(int i = 0; i < k; i++){
-            if(vowels.contains(s.charAt(i))){
-                totalVowel++;
+        // Calculate the count of vowels in the first substring of length k
+        for (int i = 0; i < k; i++) {
+            if (vowels.contains(s.charAt(i))) {
+                currentVowelsCount++;
             }
         }
-        int maxVowel = totalVowel;
+        maxVowelsCount = currentVowelsCount; // Initialize max count
 
-        for(int i = k; i < s.length(); i++){
-            if(vowels.contains(s.charAt(i))){
-                totalVowel++;
-            }
-            if(vowels.contains(s.charAt(i - k))){
-                totalVowel--;
+        // Use sliding window approach to traverse the string and find maximum vowel count
+        for (int i = k; i < s.length(); i++) {
+            // Remove the leftmost character from the window
+            if (vowels.contains(s.charAt(i - k))) {
+                currentVowelsCount--;
             }
 
-            maxVowel = Math.max(maxVowel, totalVowel);
+            // Add the new character to the window
+            if (vowels.contains(s.charAt(i))) {
+                currentVowelsCount++;
+            }
+
+            // Update max count if the current count is greater
+            maxVowelsCount = Math.max(maxVowelsCount, currentVowelsCount);
+
+            // If the maximum possible vowels (k) are found, break the loop
+            if (maxVowelsCount == k) {
+                break;
+            }
         }
-        return maxVowel;
+
+        return maxVowelsCount;
     }
 }

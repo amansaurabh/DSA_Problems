@@ -4,7 +4,9 @@ class Solution {
 
         for(char ch : s.toCharArray()){
             if(ch == '*'){
+                if (!stk.isEmpty() && stk.peek() != '*') {
                 stk.pop();
+                }
             }
             else{
                 stk.push(ch);

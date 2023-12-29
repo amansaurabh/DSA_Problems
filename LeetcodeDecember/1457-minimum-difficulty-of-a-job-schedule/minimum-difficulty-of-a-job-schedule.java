@@ -23,37 +23,43 @@ class Solution {
     //     t[idx][d] = finalRes; // Memoize the result
     //     return finalRes;
     // } 
-    public int minDifficulty(int[] jobDifficulty, int d) {
-        int n = jobDifficulty.length;
-        if (n < d) return -1;
 
-        Map<String, Integer> memo = new HashMap<>();
-        int result = dfs(jobDifficulty, d, 0, memo);
-        return result == Integer.MAX_VALUE ? -1 : result;
+    public int minDifficulty(int[] jd, int d) {
+    //     int n = jd.length;
+    //     if (n < d) return -1;
+
+    //     // Initialize t array with -1
+    //     for (int i = 0; i < t.length; i++) {
+    //         Arrays.fill(t[i], -1);
+    //     }
+
+    // return solve(jd, n, 0, d);
+
+
+    int n = jd.length;
+    if (n < d) return -1;
+
+    int[][] dp = new int[d + 1][n + 1];
+
+    // Initialize the DP array with maximum values
+    for (int[] row : dp) {
+        Arrays.fill(row, Integer.MAX_VALUE);
     }
 
-    private int dfs(int[] jobDifficulty, int days, int index, Map<String, Integer> memo) {
-        if (index == jobDifficulty.length && days == 0) return 0;
-        if (index == jobDifficulty.length || days == 0) return Integer.MAX_VALUE;
+    dp[0][0] = 0;
 
-        String key = index + "_" + days;
-        if (memo.containsKey(key)) {
-            return memo.get(key);
-        }
-
-        int maxDifficulty = jobDifficulty[index];
-        int minDifficulty = Integer.MAX_VALUE;
-        int result = Integer.MAX_VALUE;
-
-        for (int i = index; i < jobDifficulty.length; i++) {
-            maxDifficulty = Math.max(maxDifficulty, jobDifficulty[i]);
-            int next = dfs(jobDifficulty, days - 1, i + 1, memo);
-            if (next != Integer.MAX_VALUE) {
-                result = Math.min(result, maxDifficulty + next);
+    for (int day = 1; day <= d; day++) {
+        for (int job = 1; job <= n; job++) {
+            int maxDifficulty = 0;
+            for (int k = job; k >= day; k--) {
+                maxDifficulty = Math.max(maxDifficulty, jd[k - 1]);
+                if (dp[day - 1][k - 1] != Integer.MAX_VALUE) {
+                    dp[day][job] = Math.min(dp[day][job], dp[day - 1][k - 1] + maxDifficulty);
+                }
             }
         }
+    }
 
-        memo.put(key, result);
-        return result;
+    return dp[d][n] == Integer.MAX_VALUE ? -1 : dp[d][n];
     }
 }

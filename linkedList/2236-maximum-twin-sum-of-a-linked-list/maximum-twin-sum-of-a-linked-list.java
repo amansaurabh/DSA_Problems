@@ -27,17 +27,19 @@ class Solution {
         // } 
         // return maxPair;
 
-        int[] arr = new int[100000];
-        int index = 0;
+        // int[] arr = new int[100000];
+        ArrayList<Integer> al = new ArrayList<>();
+
         while(head!=null){
-            arr[index++] = head.val;
+            al.add(head.val);
             head = head.next;
         }
         //initialize the maxSum and traverse half through the array
         int maxSum = 0;
+        int index = al.size();
         for(int i=0;i<index/2;i++){
             //calculate twin sum
-            int twinSum = arr[i]+arr[index-1-i];
+            int twinSum = al.get(i)+al.get(index-1-i);
 
             //update the max Sum
             maxSum = Math.max(maxSum, twinSum);

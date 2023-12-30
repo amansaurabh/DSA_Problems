@@ -16,22 +16,34 @@ class Solution {
         // }
         // return true;
 
-    int[] charCount = new int[26]; // only lowercase English letters
 
-    // Count occurrences of each character in all words
-    for (String word : words) {
-        for (char ch : word.toCharArray()) {
-            charCount[ch - 'a']++;
-        }
-    }
+        // Using array instead of map
 
-    int n = words.length;
-    for (int count : charCount) {
-        if (count % n != 0) {
-            return false; // If any character count is not divisible by the total number of words
-        }
-    }
+        int n = words.length;
+        int[] charCount = new int[26]; 
 
-    return true;
+        // for (String word : words) {
+        //     for (char ch : word.toCharArray()) {
+        //         charCount[ch - 'a']++;
+        //     }
+        // }
+
+        // Using Lambda we can convert by
+
+         Arrays.stream(words)
+                .flatMapToInt(String::chars)
+                .forEach(ch -> charCount[ch - 'a']++);
+
+        // for (int count : charCount) {
+        //     if (count % n != 0) {
+        //         return false;
+        //     }
+        // }
+
+        // Using Lambda we can convert by
+
+        return Arrays.stream(charCount).allMatch(c -> c % n ==0);
+        // return true;
+
     }
 }

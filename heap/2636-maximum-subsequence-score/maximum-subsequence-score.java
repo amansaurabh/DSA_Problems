@@ -15,7 +15,7 @@ class Solution {
         heap.offer(arr[i][0]);
         sum += arr[i][0];
 
-        if (i >= k)
+        if (i > k - 1)
             sum -= heap.poll();
         
         if (i >= k-1)

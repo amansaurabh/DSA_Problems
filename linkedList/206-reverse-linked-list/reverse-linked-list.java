@@ -26,23 +26,34 @@ class Solution {
         // return prev;
 
 
+    //     ListNode prev_p = null;
+    //     ListNode current_p = head;
+    //     ListNode next_p;
+       
+    //    //step 2
+    //     while(current_p != null) {
+
+    //         next_p = current_p.next;
+    //         current_p.next = prev_p;
+            
+    //         prev_p = current_p;
+    //         current_p = next_p;
+    //     }
+
+    //     head = prev_p;
+    //     return head;
+
         //----------- Using Recursion---------------
 
-        ListNode prev_p = null;
-        ListNode current_p = head;
-        ListNode next_p;
-       
-       //step 2
-        while(current_p != null) {
-
-            next_p = current_p.next;
-            current_p.next = prev_p;
-            
-            prev_p = current_p;
-            current_p = next_p;
+        if(head == null || head.next == null){
+            return head;
         }
 
-        head = prev_p;
-        return head;
+        ListNode newHead = reverseList(head.next);
+
+        head.next.next = head;
+        head.next = null;
+
+        return newHead;
     }
 }

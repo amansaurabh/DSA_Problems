@@ -48,7 +48,7 @@ class Solution {
 
     private void solve(TreeNode root, int temp){
         if(root != null){
-            temp = temp ^ (1 << root.val);
+            temp ^= (1 << root.val);
 
             if(root.left == null && root.right == null){
                 if((temp & (temp - 1)) == 0){

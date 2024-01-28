@@ -1,30 +1,39 @@
 class Solution {
     public int numSubmatrixSumTarget(int[][] matrix, int target) {
-        int n=matrix.length;
-        int m=matrix[0].length;
-        int arr[][]=new int[n+1][m+1];
-        int count=0;
-        for(int i=1;i<=n;i++){
-            for(int j=1;j<=m;j++){
-                arr[i][j]=arr[i-1][j]+arr[i][j-1]-arr[i-1][j-1]+matrix[i-1][j-1];
+        int m = matrix.length;
+        int n = matrix[0].length;
+
+        // Calculate the prefix sum for each submatrix
+        for (int i = 0; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                matrix[i][j] += matrix[i][j - 1];
             }
         }
-        
-        for(int i = 1; i <=n; ++i){
-            for(int j = 1; j <=m; ++j){
-                
-              for(int k = 0; k <= (n - i); ++k){
-                for(int p = 0; p <= (m - j); ++p){
-                    
-                    int sum=arr[i+k][j+p]+arr[k][p]-arr[i+k][p]-arr[k][j+p];
-                    if(sum==target){
-                        count++;
+
+        int count = 0;
+
+        // Iterate over all pairs of columns (left and right)
+        for (int left = 0; left < n; left++) {
+            for (int right = left; right < n; right++) {
+                Map<Integer, Integer> prefixSumCount = new HashMap<>();
+                prefixSumCount.put(0, 1);
+                int currentSum = 0;
+
+                // Iterate over each row and calculate the sum of submatrices
+                for (int row = 0; row < m; row++) {
+                    int sum = matrix[row][right] - ((left > 0) ? matrix[row][left - 1] : 0);
+                    currentSum += sum;
+
+                    // Check if there is a submatrix with the target sum
+                    if (prefixSumCount.containsKey(currentSum - target)) {
+                        count += prefixSumCount.get(currentSum - target);
                     }
-                    
+
+                    prefixSumCount.put(currentSum, prefixSumCount.getOrDefault(currentSum, 0) + 1);
                 }
-              }
             }
-          }
+        }
+
         return count;
     }
 }

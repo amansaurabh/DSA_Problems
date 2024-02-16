@@ -22,14 +22,37 @@ class Solution {
         // }
         // return -1;
 
-        int a[]=new int[nums.length+1];
-        for(int i=0;i<nums.length;i++)
-        {
-            if(a[nums[i]]==1)
-            return nums[i];
-            else
-            a[nums[i]]++;
+        //Approach 3:
+
+        // int a[] = new int[nums.length+1];
+
+        // for(int i=0; i<nums.length; i++)
+        // {
+        //     if(a[nums[i]]==1)
+        //     return nums[i];
+        //     else
+        //     a[nums[i]]++;
+        // }
+        // return 0;
+
+        //Approach 4: Hare and tortise
+        int slow = nums[0];
+        int fast = nums[0];
+
+        slow = nums[slow];
+        fast = nums[nums[fast]];
+
+        while(slow != fast){
+            slow = nums[slow];
+            fast = nums[nums[fast]];
         }
-        return 0;
+
+        slow = nums[0];
+
+        while(slow != fast){
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
     }
 }

@@ -9,17 +9,27 @@ class Solution {
         // return -1;
 
         // Another appraoch
-        Map<Integer, Integer> freq = new HashMap<>();
+        // Map<Integer, Integer> freq = new HashMap<>();
 
-        for(int num : nums){
-            freq.put(num, freq.getOrDefault(num, 0) + 1);
-        }
+        // for(int num : nums){
+        //     freq.put(num, freq.getOrDefault(num, 0) + 1);
+        // }
 
-        for(Map.Entry<Integer, Integer> entry : freq.entrySet()){
-            if(entry.getValue() > 1){
-                return entry.getKey();
-            }
+        // for(Map.Entry<Integer, Integer> entry : freq.entrySet()){
+        //     if(entry.getValue() > 1){
+        //         return entry.getKey();
+        //     }
+        // }
+        // return -1;
+
+        int a[]=new int[nums.length+1];
+        for(int i=0;i<nums.length;i++)
+        {
+            if(a[nums[i]]==1)
+            return nums[i];
+            else
+            a[nums[i]]++;
         }
-        return -1;
+        return 0;
     }
 }

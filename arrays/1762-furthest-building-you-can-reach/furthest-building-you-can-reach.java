@@ -2,29 +2,54 @@ class Solution {
     public int furthestBuilding(int[] heights, int bricks, int ladders) {
         int n = heights.length;
 
-        // Using MaxHeap
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+        // Using MaxHeap TC O(nlogn) SC: O(n);
 
+        // PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
+
+        // for (int i = 0; i < n - 1; i++) {
+
+        //     if (heights[i + 1] <= heights[i]) {
+        //         continue;
+        //     }
+
+        //     int diff = heights[i + 1] - heights[i];
+        //     bricks -= diff;
+        //     pq.offer(diff);
+
+        //     if(bricks < 0){
+        //         bricks += pq.poll();
+        //         if(ladders > 0){
+        //             ladders--;
+        //         }else{
+        //             return i;
+        //         }
+        //     }
+        // }
+        // return n - 1;
+
+        // We can solve using Min Heap also
+
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+        
         for (int i = 0; i < n - 1; i++) {
-
-            if (heights[i + 1] <= heights[i]) {
-                continue;
-            }
-
             int diff = heights[i + 1] - heights[i];
-            bricks -= diff;
-            pq.offer(diff);
-
-            if(bricks < 0){
-                bricks += pq.poll();
-                if(ladders > 0){
-                    ladders--;
-                }else{
+            
+            if (diff > 0) {
+                minHeap.offer(diff);
+                
+                if (minHeap.size() > ladders) {
+                    bricks -= minHeap.poll();
+                }
+                
+                if (bricks < 0) {
                     return i;
                 }
             }
         }
+        
         return n - 1;
+
+
         // return solve(0, heights, bricks, ladders);
     }
 

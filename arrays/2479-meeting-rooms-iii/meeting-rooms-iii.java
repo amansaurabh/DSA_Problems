@@ -1,39 +1,52 @@
 class Solution {
     public int mostBooked(int n, int[][] meetings) {
-         int[] ans = new int[n];
-        long[] times = new long[n];
+
+        // sort by starting time of meetings
         Arrays.sort(meetings, (a, b) -> Integer.compare(a[0], b[0]));
 
-        for (int i = 0; i < meetings.length; i++) {
-            int start = meetings[i][0], end = meetings[i][1];
-            boolean flag = false;
-            int minind = -1;
-            long val = Long.MAX_VALUE;
-            for (int j = 0; j < n; j++) {
-                if (times[j] < val) {
-                    val = times[j];
-                    minind = j;
-                }
-                if (times[j] <= start) {
-                    flag = true;
-                    ans[j]++;
-                    times[j] = end;
+        // Each room is used 0 times in the beginning
+        int[] roomsUsedCount = new int[n];
+        // Each room will be last available at
+        long[] lastAvailableAt = new long[n];
+
+        for (int[] meet : meetings) {
+            int start = meet[0];
+            int end = meet[1];
+            boolean found = false;
+
+            long earlyEndRoomTime = Long.MAX_VALUE;
+            int earlyEndRoom = 0;
+
+            // Find the first available meeting room
+            for (int room = 0; room < n; room++) {
+                if (lastAvailableAt[room] <= start) {
+                    found = true;
+                    lastAvailableAt[room] = end;
+                    roomsUsedCount[room]++;
                     break;
                 }
+
+                if (lastAvailableAt[room] < earlyEndRoomTime) {
+                    earlyEndRoom = room;
+                    earlyEndRoomTime = lastAvailableAt[room];
+                }
             }
-            if (!flag) {
-                ans[minind]++;
-                times[minind] += (end - start);
+
+            if (!found) {
+                lastAvailableAt[earlyEndRoom] += (end - start);
+                roomsUsedCount[earlyEndRoom]++;
             }
         }
 
-        int maxi = -1, id = -1;
-        for (int i = 0; i < n; i++) {
-            if (ans[i] > maxi) {
-                maxi = ans[i];
-                id = i;
+        int resultRoom = -1;
+        int maxUse = 0;
+        for (int room = 0; room < n; room++) {
+            if (roomsUsedCount[room] > maxUse) {
+                maxUse = roomsUsedCount[room];
+                resultRoom = room;
             }
         }
-        return id;
+
+        return resultRoom;
     }
 }

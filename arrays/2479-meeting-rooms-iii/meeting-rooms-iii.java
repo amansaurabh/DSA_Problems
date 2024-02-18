@@ -37,15 +37,15 @@ class Solution {
             }
         }
 
-        int res = -1;
+        int resultRoom = -1;
         int maxUse = 0;
 
         for(int room = 0; room < n; room++){
             if(roomsUsedCount[room] > maxUse){
                 maxUse = roomsUsedCount[room];
-                res = room;
+                resultRoom = room;
             }
         }
-        return res;
+        return resultRoom;
     }
 }

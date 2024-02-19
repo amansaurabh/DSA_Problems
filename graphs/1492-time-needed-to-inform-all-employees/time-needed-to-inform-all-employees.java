@@ -1,4 +1,5 @@
 class Solution {
+    int maxTime = 0;
     public int numOfMinutes(int n, int headID, int[] manager, int[] informTime) {
         if(n == 1){
             return 0;
@@ -14,16 +15,15 @@ class Solution {
                 adj.get(manager[i]).add(i);
             }
         }
-
-        return dfs(adj, headID, informTime);
+        dfs(adj, headID, informTime, 0);
+        return maxTime;
     }
 
-    private int dfs(List<List<Integer>> adj, int currEmp, int[] informTime){
-        int maxTime = 0;
-
+    private void dfs(List<List<Integer>> adj, int currEmp, int[] informTime, int curr_time){
+        maxTime = Math.max(maxTime, curr_time);
+        
         for(int subOrdinate : adj.get(currEmp)){
-            maxTime = Math.max(maxTime, dfs(adj, subOrdinate, informTime));
+           dfs(adj, subOrdinate, informTime, curr_time + informTime[currEmp]);
         }
-        return maxTime + informTime[currEmp];
     }
 }

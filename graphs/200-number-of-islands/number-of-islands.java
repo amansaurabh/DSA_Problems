@@ -1,38 +1,39 @@
 class Solution {
+    int m, n;
+    int[][] dirs = new int[][] {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
+
     public int numIslands(char[][] grid) {
-        if(grid == null || grid.length == 0 || grid[0].length == 0){
+        m = grid.length;
+        n = grid[0].length;
+
+        if(grid == null || m == 0 || n == 0){
             return 0;
         }
 
-        int numRows = grid.length;
-        int numCols = grid[0].length;
-        int numOfIslands = 0;
+        int count = 0;
 
-        for(int i = 0; i < numRows; i++){
-            for(int j = 0; j < numCols; j++){
+        for(int i = 0; i < m; i++){
+            for(int j = 0; j < n; j++){
                 if(grid[i][j] == '1'){
-                    numOfIslands++;
+                    count++;
                     dfs(grid, i, j);
                 }
             }
         }
-        return numOfIslands;
+        return count;
     }
 
     private void dfs(char[][] grid, int row, int col){
-        int numRows = grid.length;
-        int numCols = grid[0].length;
-
-        if (row < 0 || col < 0 || row >= numRows || col >= numCols || grid[row][col] == '0') {
-            return;
-        }
 
         grid[row][col] = '0';
 
-        // Explore the neighboring land cells in all four directions
-        dfs(grid, row - 1, col); // Up
-        dfs(grid, row + 1, col); // Down
-        dfs(grid, row, col - 1); // Left
-        dfs(grid, row, col + 1); // Right
+        for(int[] dir : dirs){
+            int newX = row + dir[0];
+            int newY = col + dir[1];
+
+            if(newX >= 0 && newY >= 0 && newX < m && newY < n && grid[newX][newY] == '1'){
+                dfs(grid, newX, newY);
+            }
+        }
     }
 }

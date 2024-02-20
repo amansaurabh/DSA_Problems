@@ -17,8 +17,9 @@ class Solution {
         return -1;
         */
 
-        // Approach 2:
+        // Approach 2: TC O(n); SC O(1) 
 
+        /*
         int n = nums.length;
         int totalSum = (n * (n + 1)) / 2;
 
@@ -26,5 +27,17 @@ class Solution {
             totalSum -= num;
         }
         return totalSum;
+        */
+
+        // Approach 3: TC O(n); SC O(1)
+
+        int n = nums.length;
+        int result = n;
+
+        for(int i = 0; i < n; i++){
+            result ^= i;
+            result ^= nums[i];
+        }
+        return result;
     }
 }

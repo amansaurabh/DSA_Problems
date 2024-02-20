@@ -1,6 +1,8 @@
 class Solution {
     public int missingNumber(int[] nums) {
-        // Appraoch 1 : 
+        // Appraoch 1 : TC: O(n) SC O(n)
+
+        /*
         int n = nums.length;
         int[] freq = new int[n + 1];
         for(int num : nums){
@@ -13,5 +15,16 @@ class Solution {
             }
         }
         return -1;
+        */
+
+        // Approach 2:
+
+        int n = nums.length;
+        int totalSum = (n * (n + 1)) / 2;
+
+        for(int num : nums){
+            totalSum -= num;
+        }
+        return totalSum;
     }
 }

@@ -8,6 +8,8 @@ class Solution {
         // return true;
 
 
+
+        // --------------------------- Anohter method to do ----------------------------
         //Intially final position is the last index
         int finalPosition = nums.length - 1;
 
